@@ -1,25 +1,25 @@
-import { Header } from "@/components/boty/header"
-import { Hero } from "@/components/boty/hero"
-import { TrustBadges } from "@/components/boty/trust-badges"
-import { FeatureSection } from "@/components/boty/feature-section"
-import { ProductGrid } from "@/components/boty/product-grid"
-import { Testimonials } from "@/components/boty/testimonials"
-import { CTABanner } from "@/components/boty/cta-banner"
-import { Newsletter } from "@/components/boty/newsletter"
-import { Footer } from "@/components/boty/footer"
+import { Hero } from "@/components/kavya/sections/hero"
+import { OccasionSelector } from "@/components/kavya/sections/occasion-selector"
+import { ChooseInvitation } from "@/components/kavya/sections/choose-invitation"
+import { FeaturedDesigns } from "@/components/kavya/sections/featured-designs"
+import { WhyKavyaverse } from "@/components/kavya/sections/why-kavyaverse"
+import { HowItWorks } from "@/components/kavya/sections/how-it-works"
+import { InvitationShowcase } from "@/components/kavya/sections/invitation-showcase"
+import { Testimonials } from "@/components/kavya/sections/testimonials"
+import { FinalCta } from "@/components/kavya/sections/final-cta"
 
 export default function HomePage() {
   return (
-    <main>
-      <Header />
+    <>
       <Hero />
-      <TrustBadges />
-      <ProductGrid />
-      <FeatureSection />
+      <OccasionSelector />
+      <ChooseInvitation />
+      <FeaturedDesigns />
+      <WhyKavyaverse />
+      <HowItWorks />
+      <InvitationShowcase />
       <Testimonials />
-      <CTABanner />
-      <Newsletter />
-      <Footer />
-    </main>
+      <FinalCta />
+    </>
   )
 }
