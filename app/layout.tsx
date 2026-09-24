@@ -1,23 +1,10 @@
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import { DM_Sans, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { siteConfig } from "@/lib/site-config"
 import { Navbar } from "@/components/kavya/navbar"
 import { Footer } from "@/components/kavya/footer"
 import "./globals.css"
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["300", "400", "500", "600", "700"],
-})
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["400", "500", "600", "700"],
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -62,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${playfairDisplay.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <div className="flex min-h-dvh flex-col">
           <Navbar />
           <main className="flex-1">{children}</main>
