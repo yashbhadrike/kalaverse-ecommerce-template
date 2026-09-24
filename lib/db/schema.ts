@@ -1,6 +1,4 @@
-import { boolean, integer, jsonb, pgSchema, pgTable, text, timestamp } from "drizzle-orm/pg-core"
-
-const publicSchema = pgSchema("public")
+import { boolean, integer, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -43,7 +41,7 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 })
 
-export const products = publicSchema.table("kv_products", {
+export const products = pgTable("kv_products", {
   id: text("id").primaryKey(), title: text("title").notNull(), slug: text("slug").notNull().unique(),
   price: integer("price").notNull().default(0), description: text("description").notNull().default(""),
   shortDescription: text("short_description").notNull().default(""), occasion: text("occasion").notNull(),
@@ -55,11 +53,11 @@ export const products = publicSchema.table("kv_products", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 })
 
-export const occasions = publicSchema.table("kv_occasions", {
+export const occasions = pgTable("kv_occasions", {
   id: text("id").primaryKey(), name: text("name").notNull(), slug: text("slug").notNull().unique(), icon: text("icon").notNull().default("Sparkles"), description: text("description").notNull().default(""), displayOrder: integer("display_order").notNull().default(0), active: boolean("active").notNull().default(true),
 })
 
-export const content = publicSchema.table("kv_content", { key: text("key").primaryKey(), value: jsonb("value").$type<Record<string, unknown>>().notNull().default({}), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow() })
+export const content = pgTable("kv_content", { key: text("key").primaryKey(), value: jsonb("value").$type<Record<string, unknown>>().notNull().default({}), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow() })
 
 export const schema = { user, session, account, verification, products, occasions, content }
 export type ProductRow = typeof products.$inferSelect
