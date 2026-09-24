@@ -37,8 +37,39 @@ export function ProductGallery({ product }: { product: Product }) {
   }, [lightbox, media.length])
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-secondary kv-shadow">
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
+      {media.length > 1 && (
+        <div className="no-scrollbar order-2 flex gap-3 overflow-x-auto pb-1 lg:order-1 lg:w-20 lg:flex-col lg:overflow-visible">
+          {media.map((item, i) => (
+            <button
+              key={`${item.src}-${i}`}
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`Show ${item.type} ${i + 1}`}
+              aria-current={i === active}
+              className={cn(
+                "relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 bg-secondary transition-colors",
+                i === active ? "border-primary" : "border-transparent hover:border-border",
+              )}
+            >
+              <Image
+                src={item.type === "image" ? item.src : item.poster}
+                alt=""
+                fill
+                sizes="80px"
+                className="object-cover"
+              />
+              {item.type === "video" && (
+                <span className="absolute inset-0 flex items-center justify-center bg-[var(--brown)]/30">
+                  <Play className="h-5 w-5 fill-[var(--ivory)] text-[var(--ivory)]" />
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="order-1 relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-secondary kv-shadow lg:order-2 lg:flex-1">
         {current.type === "image" ? (
           <>
             <Image
@@ -73,36 +104,6 @@ export function ProductGallery({ product }: { product: Product }) {
         )}
       </div>
 
-      {media.length > 1 && (
-        <div className="no-scrollbar flex gap-3 overflow-x-auto pb-1">
-          {media.map((item, i) => (
-            <button
-              key={`${item.src}-${i}`}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Show ${item.type} ${i + 1}`}
-              aria-current={i === active}
-              className={cn(
-                "relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 bg-secondary transition-colors",
-                i === active ? "border-primary" : "border-transparent hover:border-border",
-              )}
-            >
-              <Image
-                src={item.type === "image" ? item.src : item.poster}
-                alt=""
-                fill
-                sizes="80px"
-                className="object-cover"
-              />
-              {item.type === "video" && (
-                <span className="absolute inset-0 flex items-center justify-center bg-[var(--brown)]/30">
-                  <Play className="h-5 w-5 fill-[var(--ivory)] text-[var(--ivory)]" />
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
 
       {lightbox && current.type === "image" && (
         <div
