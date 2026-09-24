@@ -41,8 +41,12 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 })
 
+export const categories = pgTable("kv_categories", {
+  id: text("id").primaryKey(), name: text("name").notNull(), slug: text("slug").notNull().unique(), description: text("description").notNull().default(""), icon: text("icon").notNull().default("Sparkles"), displayOrder: integer("display_order").notNull().default(0), active: boolean("active").notNull().default(true), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+})
+
 export const products = pgTable("kv_products", {
-  id: text("id").primaryKey(), title: text("title").notNull(), slug: text("slug").notNull().unique(),
+  id: text("id").primaryKey(), title: text("title").notNull(), slug: text("slug").notNull().unique(), categoryId: text("category_id"),
   price: integer("price").notNull().default(0), description: text("description").notNull().default(""),
   shortDescription: text("short_description").notNull().default(""), occasion: text("occasion").notNull(),
   thumbnail: text("thumbnail").notNull().default(""), images: jsonb("images").$type<string[]>().notNull().default([]),
@@ -59,7 +63,8 @@ export const occasions = pgTable("kv_occasions", {
 
 export const content = pgTable("kv_content", { key: text("key").primaryKey(), value: jsonb("value").$type<Record<string, unknown>>().notNull().default({}), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow() })
 
-export const schema = { user, session, account, verification, products, occasions, content }
+export const schema = { user, session, account, verification, categories, products, occasions, content }
+export type CategoryRow = typeof categories.$inferSelect
 export type ProductRow = typeof products.$inferSelect
 export type NewProduct = typeof products.$inferInsert
 export type OccasionRow = typeof occasions.$inferSelect
