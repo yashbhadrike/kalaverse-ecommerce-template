@@ -1,7 +1,7 @@
 import type { CategoryRow, ProductRow } from "@/lib/db/schema"
 import { saveProduct } from "@/app/admin/products/actions"
 
-export function ProductEditor({ product, categories }: { product?: ProductRow; categories: CategoryRow[] }) {
+export function ProductEditor({ product, categories = [] }: { product?: ProductRow; categories?: CategoryRow[] }) {
   const images = (product?.images ?? []).join("\n")
   const video = Array.isArray(product?.videos) && product.videos[0] && typeof product.videos[0] === "object" ? String((product.videos[0] as { src?: string }).src ?? "") : ""
   return <form action={saveProduct} className="space-y-7 rounded-2xl border border-[#e4d9c7] bg-[#fffdf8] p-6">
