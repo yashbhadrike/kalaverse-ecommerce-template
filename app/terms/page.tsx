@@ -3,7 +3,7 @@ import { LegalDoc } from "@/components/kavya/legal-doc"
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
-  description: "The terms and conditions for using KavyaVerse Digital and ordering digital invitations.",
+  description: "The terms and conditions for using KalaVerse Digital and ordering digital invitations.",
 }
 
 export default function TermsPage() {
@@ -16,7 +16,7 @@ export default function TermsPage() {
         {
           heading: "1. Overview",
           paragraphs: [
-            "KavyaVerse Digital provides personalised digital invitation design services. By using our website or placing an order, you agree to these terms and conditions.",
+            "KalaVerse Digital provides personalised digital invitation design services. By using our website or placing an order, you agree to these terms and conditions.",
           ],
         },
         {
@@ -29,7 +29,7 @@ export default function TermsPage() {
         {
           heading: "3. Intellectual Property",
           paragraphs: [
-            "All designs, artwork and templates remain the intellectual property of KavyaVerse Digital. Purchasing an invitation grants you the right to use it for your personal celebration only.",
+            "All designs, artwork and templates remain the intellectual property of KalaVerse Digital. Purchasing an invitation grants you the right to use it for your personal celebration only.",
             "Designs may not be resold, redistributed or used for commercial purposes without written permission.",
           ],
         },
@@ -48,7 +48,7 @@ export default function TermsPage() {
         {
           heading: "6. Limitation of Liability",
           paragraphs: [
-            "KavyaVerse Digital is not liable for errors resulting from inaccurate information provided by the customer, or for issues arising from third-party platforms used to share invitations.",
+            "KalaVerse Digital is not liable for errors resulting from inaccurate information provided by the customer, or for issues arising from third-party platforms used to share invitations.",
           ],
         },
         {

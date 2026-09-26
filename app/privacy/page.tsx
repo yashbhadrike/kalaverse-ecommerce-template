@@ -3,7 +3,7 @@ import { LegalDoc } from "@/components/kavya/legal-doc"
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How KavyaVerse Digital collects, uses and protects your personal information.",
+  description: "How KalaVerse Digital collects, uses and protects your personal information.",
 }
 
 export default function PrivacyPage() {

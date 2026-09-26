@@ -23,9 +23,9 @@ export async function generateMetadata({
   if (!occasion) return { title: "Invitations" }
   return {
     title: `${occasion.name} Invitations`,
-    description: `${occasion.description} Browse digital ${occasion.name.toLowerCase()} invitations by KavyaVerse Digital.`,
+    description: `${occasion.description} Browse digital ${occasion.name.toLowerCase()} invitations by KalaVerse Digital.`,
     openGraph: {
-      title: `${occasion.name} Invitations — KavyaVerse Digital`,
+      title: `${occasion.name} Invitations — KalaVerse Digital`,
       description: occasion.description,
     },
   }

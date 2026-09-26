@@ -8,7 +8,7 @@ import { FinalCta } from "@/components/kavya/sections/final-cta"
 export const metadata: Metadata = {
   title: "About",
   description:
-    "KavyaVerse Digital is a premium Indian digital invitation studio, designing personal, polished invitations for moments that matter.",
+    "KalaVerse Digital is a premium Indian digital invitation studio, designing personal, polished invitations for moments that matter.",
 }
 
 const values = [
@@ -36,7 +36,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="Our Story"
         title="Designed for Moments That Matter."
-        description="KavyaVerse Digital is a premium studio crafting digital invitations that feel as personal as the celebrations they announce."
+        description="KalaVerse Digital is a premium studio crafting digital invitations that feel as personal as the celebrations they announce."
       >
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "About" }]} />
       </PageHeader>
@@ -57,7 +57,7 @@ export default function AboutPage() {
       <div className="mx-auto mt-16 max-w-3xl px-5 sm:mt-24 sm:px-8">
         <Reveal>
           <p className="text-pretty font-serif text-2xl leading-relaxed text-foreground sm:text-3xl">
-            KavyaVerse Digital began with a simple belief — that an invitation is the very first impression of a
+            KalaVerse Digital began with a simple belief — that an invitation is the very first impression of a
             celebration, and it deserves to feel as beautiful and personal as the moment itself.
           </p>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">

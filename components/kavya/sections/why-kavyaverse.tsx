@@ -19,7 +19,7 @@ export function WhyKavyaverse() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24">
         <Reveal>
           <SectionHeading
-            eyebrow="Why KavyaVerse"
+            eyebrow="Why KalaVerse"
             title="More Than an Invitation."
             description="Thoughtfully designed details that make your invitation feel personal, polished and ready to share."
           />

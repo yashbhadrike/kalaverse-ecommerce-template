@@ -3,7 +3,7 @@ import { LegalDoc } from "@/components/kavya/legal-doc"
 
 export const metadata: Metadata = {
   title: "Refund & Cancellation",
-  description: "Our refund and cancellation policy for digital invitation orders at KavyaVerse Digital.",
+  description: "Our refund and cancellation policy for digital invitation orders at KalaVerse Digital.",
 }
 
 export default function RefundCancellationPage() {
