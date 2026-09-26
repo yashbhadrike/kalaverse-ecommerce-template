@@ -14,6 +14,8 @@ const trustedOrigins = [
   process.env.V0_DEV_APP_URL,
   process.env.V0_BUILD_URL,
   process.env.V0_SANDBOX_URL,
+  // The production alias is the browser origin used by the live storefront.
+  "https://v0-kalaverse-digital-invitation.vercel.app",
 ].filter(Boolean) as string[]
 
 const database = new Pool({
