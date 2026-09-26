@@ -2,12 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Package, ImageIcon, Sparkles, Settings, LogOut, Menu, X } from "lucide-react"
+import { LayoutDashboard, Package, FolderOpen, ImageIcon, Sparkles, Settings, LogOut, Menu, X } from "lucide-react"
 import { useState } from "react"
 import { authClient } from "@/lib/auth-client"
 
 const nav = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard },
+  { href: "/admin/catalog", label: "Catalog", icon: FolderOpen },
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/media", label: "Media Library", icon: ImageIcon },
   { href: "/admin/content", label: "Homepage Content", icon: Sparkles },
