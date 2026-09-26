@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "KavyaVerse Digital",
+  name: "KalaVerse Digital",
   tagline: "Every Design, Every Occasion.",
   description:
     "Beautiful digital invitations for weddings, celebrations, milestones and every moment worth remembering. A premium Indian digital invitation studio.",

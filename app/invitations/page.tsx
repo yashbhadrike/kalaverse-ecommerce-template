@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Beautiful digital invitations for weddings, celebrations and every special occasion. Browse, personalise and order on WhatsApp.",
   openGraph: {
-    title: "Digital Invitations — KavyaVerse Digital",
+    title: "Digital Invitations — KalaVerse Digital",
     description: "Beautiful digital invitations for weddings, celebrations and every special occasion.",
   },
 }

@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/kavya/page-header"
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with KavyaVerse Digital. Chat with us on WhatsApp, send an email, or follow along on Instagram.",
+    "Get in touch with KalaVerse Digital. Chat with us on WhatsApp, send an email, or follow along on Instagram.",
 }
 
 const channels = [

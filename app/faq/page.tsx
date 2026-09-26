@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site-config"
 
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Answers to common questions about ordering, customising and receiving your KavyaVerse Digital invitation.",
+  description: "Answers to common questions about ordering, customising and receiving your KalaVerse Digital invitation.",
 }
 
 const faqs: FaqItem[] = [

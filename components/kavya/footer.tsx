@@ -101,7 +101,7 @@ export function Footer() {
 
         <div className="mt-14 border-t border-[var(--ivory)]/15 pt-6">
           <p className="text-center text-xs text-[var(--ivory)]/50">
-            © 2026 KavyaVerse Digital. All rights reserved.
+            © 2026 KalaVerse Digital. All rights reserved.
           </p>
         </div>
       </div>
