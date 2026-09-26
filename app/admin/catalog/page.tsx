@@ -45,14 +45,13 @@ export default async function AdminCatalogPage() {
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        {[
-          ["Products", productCount, Package],
-          ["Live products", liveCount, ImageIcon],
-          ["Categories", categoryRows.length, FolderOpen],
-        ].map(([label, value, Icon]) => {
-          const StatIcon = Icon as typeof Package
-          return <div key={String(label)} className="rounded-2xl border border-[#e4d9c7] bg-[#fffdf8] p-5"><div className="flex items-center justify-between"><span className="text-sm text-[#806f5c]">{label}</span><StatIcon className="h-4 w-4 text-[#b58a3a]" /></div><p className="mt-3 text-3xl font-semibold text-[#3b2a20]">{value}</p></div>
-        })}
+        {([
+          { label: "Products", value: productCount, Icon: Package },
+          { label: "Live products", value: liveCount, Icon: ImageIcon },
+          { label: "Categories", value: categoryRows.length, Icon: FolderOpen },
+        ] satisfies Array<{ label: string; value: number; Icon: typeof Package }>).map(({ label, value, Icon: StatIcon }) => (
+          <div key={label} className="rounded-2xl border border-[#e4d9c7] bg-[#fffdf8] p-5"><div className="flex items-center justify-between"><span className="text-sm text-[#806f5c]">{label}</span><StatIcon className="h-4 w-4 text-[#b58a3a]" /></div><p className="mt-3 text-3xl font-semibold text-[#3b2a20]">{value}</p></div>
+        ))}
       </div>
 
       <section className="mt-8">
