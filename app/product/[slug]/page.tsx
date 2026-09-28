@@ -1,6 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/products"
+import { db } from "@/lib/db"
+import { products as productTable } from "@/lib/db/schema"
+import { eq } from "drizzle-orm"
 import { getOccasion } from "@/lib/occasions"
 import { Breadcrumb } from "@/components/kavya/breadcrumb"
 import { ProductGallery } from "@/components/kavya/product/product-gallery"
@@ -14,8 +17,29 @@ import { SectionHeading } from "@/components/kavya/section-heading"
 import { HowItWorks } from "@/components/kavya/sections/how-it-works"
 import { FinalCta } from "@/components/kavya/sections/final-cta"
 
+export const dynamic = "force-dynamic"
+
 export function generateStaticParams() {
-  return getAllProducts().map((p) => ({ slug: p.slug }))
+  return []
+}
+
+async function getLiveProduct(slug: string) {
+  const row = await db.select().from(productTable).where(eq(productTable.slug, slug)).limit(1)
+  if (!row[0] || row[0].status !== "active") return undefined
+  const fallback = getProductBySlug(slug) ?? getAllProducts()[0]
+  return {
+    ...fallback,
+    ...row[0],
+    status: "active" as const,
+    occasion: row[0].occasion as typeof fallback.occasion,
+    images: row[0].images,
+    videos: row[0].videos as typeof fallback.videos,
+    features: row[0].features,
+    designDetails: row[0].designDetails as typeof fallback.designDetails,
+    showcase: row[0].showcase as typeof fallback.showcase,
+    createdAt: row[0].createdAt.toISOString(),
+    updatedAt: row[0].updatedAt.toISOString(),
+  }
 }
 
 export async function generateMetadata({
@@ -24,7 +48,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const product = getProductBySlug(slug)
+  const product = (await getLiveProduct(slug)) ?? getProductBySlug(slug)
   if (!product) return { title: "Invitation Not Found" }
   return {
     title: product.seoTitle,
@@ -43,7 +67,7 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const product = getProductBySlug(slug)
+  const product = (await getLiveProduct(slug)) ?? getProductBySlug(slug)
   if (!product) notFound()
 
   const occasion = getOccasion(product.occasion)
