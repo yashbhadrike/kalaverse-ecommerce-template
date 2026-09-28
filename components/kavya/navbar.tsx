@@ -48,11 +48,12 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 py-4 sm:px-8" aria-label="Primary">
-        <Link href="/" className="flex flex-col leading-none">
-          <span className="font-serif text-lg font-semibold tracking-editorial text-primary sm:text-xl">
-            KAVYAVERSE
-          </span>
-          <span className="text-[0.6rem] font-medium tracking-label text-accent uppercase">Digital</span>
+        <Link href="/" className="block w-32 sm:w-40" aria-label="KalaVerse Digital home">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/KalaVerse%20Digital%20Logo-ploK8vw1lMOVJ9uSKXUP1dTpamSAoh.png"
+            alt="KalaVerse Digital"
+            className="h-auto w-full object-contain"
+          />
         </Link>
 
         <div className="hidden items-center gap-9 md:flex">

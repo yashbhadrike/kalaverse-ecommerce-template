@@ -28,8 +28,13 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <p className="font-serif text-2xl font-semibold tracking-editorial">KAVYAVERSE</p>
-            <p className="text-xs font-medium tracking-label text-accent uppercase">Digital</p>
+            <Link href="/" className="block w-44" aria-label="KalaVerse Digital home">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/KalaVerse%20Digital%20Logo-ploK8vw1lMOVJ9uSKXUP1dTpamSAoh.png"
+                alt="KalaVerse Digital"
+                className="h-auto w-full object-contain"
+              />
+            </Link>
             <p className="mt-4 max-w-xs font-serif text-lg italic text-[var(--ivory)]/70">
               {siteConfig.tagline}
             </p>
