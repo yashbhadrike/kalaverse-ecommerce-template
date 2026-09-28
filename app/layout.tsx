@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { siteConfig } from "@/lib/site-config"
 import { Navbar } from "@/components/kavya/navbar"
 import { Footer } from "@/components/kavya/footer"
-import { InvitationLoader } from "@/components/kavya/invitation-loader"
+import InvitationLoader from "@/components/kavya/invitation-loader"
 import "./globals.css"
 
 export const metadata: Metadata = {
