@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { MessageCircle, Mail, Instagram } from "lucide-react"
 import { siteConfig } from "@/lib/site-config"
 
@@ -17,6 +20,9 @@ const legal = [
 ]
 
 export function Footer() {
+  const pathname = usePathname()
+  if (pathname.startsWith("/admin")) return null
+
   return (
     <footer className="bg-[var(--brown)] text-[var(--ivory)]">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
