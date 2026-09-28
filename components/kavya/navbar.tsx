@@ -17,6 +17,7 @@ const navLinks = [
 export function Navbar() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  if (pathname.startsWith("/admin")) return null
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {

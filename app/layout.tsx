@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { siteConfig } from "@/lib/site-config"
@@ -52,7 +52,9 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <div className="flex min-h-dvh flex-col">
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <Suspense fallback={null}>{children}</Suspense>
+          </main>
           <Footer />
         </div>
         <Analytics />
