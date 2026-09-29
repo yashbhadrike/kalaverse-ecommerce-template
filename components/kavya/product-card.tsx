@@ -8,7 +8,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
       href={`/product/${product.slug}`}
       className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background rounded-xl"
     >
-      <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-secondary kv-shadow transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:kv-shadow-lg">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-secondary kv-shadow transition-transform duration-500 ease-out group-hover:-translate-y-1.5 group-hover:kv-shadow-lg">
         <Image
           src={product.thumbnail || "/placeholder.svg"}
           alt={product.title}
