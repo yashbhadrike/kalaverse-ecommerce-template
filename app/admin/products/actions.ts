@@ -14,7 +14,7 @@ export async function saveProduct(formData: FormData) {
   const id = String(formData.get("id") || crypto.randomUUID())
   const title = String(formData.get("title") || "Untitled invitation")
   const slug = String(formData.get("slug") || title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""))
-  const imageList = String(formData.get("images") || "").split("\n").map((s) => s.trim()).filter(Boolean)
+  const imageList = String(formData.get("images") || "").split(/\r?\n|\\n/).map((s) => s.trim()).filter(Boolean)
   const video = String(formData.get("video") || "").trim()
   const categoryId = String(formData.get("categoryId") || "").trim() || null
   const row = { id, title, slug, categoryId, price: Number(formData.get("price") || 0), shortDescription: String(formData.get("shortDescription") || ""), description: String(formData.get("description") || ""), occasion: String(formData.get("occasion") || "other"), thumbnail: String(formData.get("thumbnail") || imageList[0] || ""), images: imageList.slice(0, 4), videos: video ? [{ src: video, poster: imageList[0] || "", label: "Product preview" }] : [], features: String(formData.get("features") || "").split("\n").map((s) => s.trim()).filter(Boolean), format: String(formData.get("format") || "Animated"), status: String(formData.get("status") || "draft"), featured: formData.get("featured") === "on", displayOrder: Number(formData.get("displayOrder") || 0), seoTitle: String(formData.get("seoTitle") || title), seoDescription: String(formData.get("seoDescription") || formData.get("shortDescription") || ""), updatedAt: new Date() }
