@@ -28,9 +28,9 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Link href="/" className="block w-44" aria-label="KalaVerse Digital home">
+            <Link href="/" className="block w-44" aria-label="Digital Nimantran Studio home">
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/KalaVerse%20Digital%20Logo-ploK8vw1lMOVJ9uSKXUP1dTpamSAoh.png"
+                src="/images/digital-nimantran-studio-logo.png"
                 alt="KalaVerse Digital"
                 className="h-auto w-full object-contain"
               />
