@@ -8,9 +8,9 @@ export function FeaturedDesigns() {
   const featured = getFeaturedProducts().slice(0, 4)
 
   return (
-    <section id="featured" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
+    <section id="featured" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-20 sm:px-8 sm:py-28">
       <Reveal>
-        <SectionHeading eyebrow="Made for Moments" title="Featured Designs" />
+        <SectionHeading eyebrow="A considered collection" title="Featured Designs" description="A few invitations that bring together expressive typography, Indian detail, and an effortless digital experience." />
       </Reveal>
 
       <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-6 sm:gap-6">
