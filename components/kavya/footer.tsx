@@ -26,16 +26,16 @@ export function Footer() {
   return (
     <footer className="bg-[var(--brown)] text-[var(--ivory)]">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <div className="lg:col-span-1">
             <Link href="/" className="block w-44" aria-label="Digital Nimantran Studio home">
               <img
                 src="/images/digital-nimantran-studio-logo.png"
-                alt="KalaVerse Digital"
+                alt="Digital Nimantran Studio"
                 className="h-auto w-full object-contain"
               />
             </Link>
-            <p className="mt-4 max-w-xs font-serif text-lg italic text-[var(--ivory)]/70">
+            <p className="mt-5 max-w-xs font-serif text-base italic leading-7 text-[var(--ivory)]/70">
               {siteConfig.tagline}
             </p>
           </div>

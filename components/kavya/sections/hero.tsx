@@ -4,8 +4,8 @@ import { ArrowUpRight, ArrowRight } from "lucide-react"
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+    <section className="relative overflow-hidden border-b border-border/70">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:py-24">
         <div className="animate-fade-in flex flex-col items-start">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium tracking-label text-accent uppercase">
             Premium Digital Invitations
@@ -14,7 +14,7 @@ export function Hero() {
             Invitations Made to Feel Like You.
           </h1>
           <p className="mt-6 max-w-md text-pretty text-lg leading-relaxed text-muted-foreground">
-            Beautiful digital invitations for weddings, celebrations, milestones and every moment worth remembering.
+            Beautiful digital invitations designed around your story, your celebration, and your style.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
@@ -28,14 +28,14 @@ export function Hero() {
               href="/#featured"
               className="group inline-flex items-center justify-center gap-2 rounded-full border border-border px-7 py-4 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
             >
-              View Featured Designs
+              View Collection
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
 
         <div className="relative">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl bg-secondary kv-shadow-lg">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-lg overflow-hidden rounded-[2rem] border border-border bg-secondary kv-shadow-lg lg:rotate-[1.5deg]">
             <Image
               src="/images/hero-invitation.png"
               alt="Premium maroon and antique-gold Indian digital wedding invitation"

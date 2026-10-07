@@ -6,23 +6,23 @@
 /* KavyaVerse Digital — Premium Indian Invitation Studio */
 :root {
   /* Brand: Warm Ivory, Antique Gold, Deep Maroon, Dark Brown, Charcoal, Soft Beige */
-  --background: #F7F3EA; /* Warm Ivory */
-  --foreground: #252525; /* Charcoal */
-  --card: #FFFFFF;
+  --background: #F8F3EA; /* Warm Ivory */
+  --foreground: #2E1C16; /* Dark Brown */
+  --card: #FFFDF9;
   --card-foreground: #252525;
   --popover: #FFFFFF;
   --popover-foreground: #252525;
-  --primary: #641B2A; /* Deep Maroon */
+  --primary: #6B1F34; /* Deep Maroon */
   --primary-foreground: #F7F3EA;
   --secondary: #E9E0D1; /* Soft Beige */
   --secondary-foreground: #3B2A20;
   --muted: #E9E0D1; /* Soft Beige */
   --muted-foreground: #6B5A4A;
-  --accent: #B58A3A; /* Antique Gold */
+  --accent: #B8925A; /* Antique Gold */
   --accent-foreground: #F7F3EA;
   --destructive: #8A2A2A;
   --destructive-foreground: #F7F3EA;
-  --border: #E0D5C2;
+  --border: #E7DDCE;
   --input: #E9E0D1;
   --ring: #B58A3A;
   --chart-1: #641B2A;

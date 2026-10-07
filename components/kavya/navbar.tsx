@@ -41,17 +41,17 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b transition-colors duration-500",
+        "sticky top-0 z-50 w-full border-b transition-all duration-500",
         scrolled || open
-          ? "border-border/70 bg-background/90 backdrop-blur-md"
-          : "border-transparent bg-transparent",
+          ? "border-border/70 bg-background/90 shadow-[0_8px_30px_rgba(46,28,22,0.06)] backdrop-blur-md"
+          : "border-transparent bg-background/60",
       )}
     >
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 py-4 sm:px-8" aria-label="Primary">
-        <Link href="/" className="block w-32 sm:w-40" aria-label="Digital Nimantran Studio home">
+        <Link href="/" className="block w-36 sm:w-44" aria-label="Digital Nimantran Studio home">
           <img
             src="/images/digital-nimantran-studio-logo.png"
-            alt="KalaVerse Digital"
+            alt="Digital Nimantran Studio"
             className="h-auto w-full object-contain"
           />
         </Link>
