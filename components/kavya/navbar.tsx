@@ -47,7 +47,7 @@ export function Navbar() {
           : "border-transparent bg-background/60",
       )}
     >
-      <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 py-4 sm:px-8" aria-label="Primary">
+      <nav className="mx-auto flex h-14 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary">
         <Link href="/" className="block w-36 sm:w-44" aria-label="Digital Nimantran Studio home">
           <img
             src="/images/digital-nimantran-studio-logo.png"
