@@ -50,6 +50,40 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
   return <div ref={ref} className={className}>{children}</div>
 }
 
+function HeroSection() {
+  const heroRef = useRef<HTMLElement>(null)
+  const cards = products.slice(0, 7)
+
+  useEffect(() => {
+    if (!heroRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".hero-copy", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.85, ease: "power3.out" })
+      gsap.fromTo(".hero-card", { opacity: 0, y: 70, rotateX: 12 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.9, stagger: 0.08, delay: 0.25, ease: "power3.out" })
+    }, heroRef)
+    return () => ctx.revert()
+  }, [])
+
+  return <section ref={heroRef} className="overflow-hidden bg-white px-0 pb-12 pt-10 text-center sm:pb-16 md:pb-20 md:pt-14">
+    <div className="hero-copy mx-auto max-w-2xl px-5 sm:px-8">
+      <p className="text-base font-medium text-muted-foreground sm:text-lg">Premium</p>
+      <h1 className="mx-auto mt-4 max-w-xl font-sans text-[2.2rem] font-semibold leading-[0.98] tracking-[-0.06em] text-black sm:text-5xl md:text-[3.25rem]">Wedding Invitation<br />Website Templates</h1>
+      <p className="mx-auto mt-5 max-w-md text-sm leading-6 text-muted-foreground sm:text-base">Choose a template, customise in 10 minutes<br className="hidden sm:block" /> and share it with your guests.</p>
+      <Link href="#templates" className="mt-7 inline-flex min-h-12 w-[210px] items-center justify-center rounded-full bg-black px-6 text-sm font-semibold text-white transition hover:scale-[1.03] hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4">Choose a template</Link>
+    </div>
+    <div className="relative mx-auto mt-9 h-[220px] max-w-[1440px] [perspective:1200px] sm:mt-14 sm:h-[280px] md:mt-16 md:h-[320px]">
+      <div className="absolute left-1/2 top-1/2 flex w-max -translate-x-1/2 -translate-y-1/2 items-end gap-2 sm:gap-3 md:gap-5 [transform-style:preserve-3d]">
+        {cards.map((product, index) => {
+          const center = (cards.length - 1) / 2
+          const offset = index - center
+          return <Link key={product.id} href={`/product/${product.slug}`} className="hero-card group relative w-[108px] shrink-0 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_18px_35px_rgba(0,0,0,0.14)] transition-transform duration-300 hover:-translate-y-4 sm:w-[145px] md:w-[185px]" style={{ transform: `rotateY(${offset * -13}deg) translateZ(${Math.max(0, 90 - Math.abs(offset) * 22)}px) translateY(${Math.abs(offset) * 14}px)`, zIndex: 20 - Math.abs(offset) }}>
+            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="185px" priority={index < 3} />
+          </Link>
+        })}
+      </div>
+    </div>
+  </section>
+}
+
 function InvitationShowcase() {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -98,4 +132,4 @@ function Stories() { return <section className="overflow-hidden border-y border-
 
 function FAQ() { const [open, setOpen] = useState<number | null>(null); return <section id="faq" className="mx-auto max-w-4xl scroll-mt-20 px-5 py-24 sm:px-8 md:py-36"><Reveal><Label index="07" children="Questions" /><h2 className="mt-7 font-serif text-4xl leading-[1.03] tracking-[-0.04em] sm:text-6xl">Questions?<br /><em>Answers.</em></h2></Reveal><div className="mt-14">{faqs.map((question, index) => <div key={question} className="border-t border-border"><button type="button" onClick={() => setOpen(open === index ? null : index)} className="flex w-full items-center justify-between gap-6 py-6 text-left font-serif text-xl"><span>{question}</span>{open === index ? <Minus size={18} /> : <Plus size={18} />}</button><div className={`grid transition-[grid-template-rows,opacity] duration-300 ${open === index ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}><p className="overflow-hidden pb-6 text-sm leading-7 text-muted-foreground">Yes. Every invitation is designed to be personalised with your names, events, photos, venue details, music, and sharing preferences.</p></div></div>)}</div></section> }
 
-export function Homepage() { return <><InvitationLoader /><div className="bg-background"><section className="mx-auto max-w-7xl px-5 pb-20 pt-16 text-center sm:px-8 md:pb-28 md:pt-20"><div className="mx-auto max-w-4xl"><Reveal><Label index="00" children="Digital invitations, reimagined" /><h1 className="mx-auto mt-8 max-w-3xl font-sans text-[2.8rem] font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl md:text-[6.5rem]">Wedding invitation<br /><span className="font-serif font-normal"><em>websites, reimagined.</em></span></h1><p className="mx-auto mt-6 max-w-md text-sm leading-6 text-muted-foreground">Beautiful, interactive invitations made to share your story.</p><div className="mt-8 flex justify-center gap-3"><Link href="#templates" className="inline-flex items-center gap-2 rounded-full border border-primary bg-primary px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-transform hover:-translate-y-1">Explore designs <ArrowUpRight size={14} /></Link><Link href="#how-it-works" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em]">How it works <ArrowUpRight size={14} /></Link></div></Reveal></div></section><InvitationShowcase /><Gallery /><FeatureSection /><HowItWorks /><Comparison /><Stories /><FAQ /><section className="border-t border-border px-5 py-28 text-center sm:px-8 md:py-44"><Reveal><p className="text-[10px] uppercase tracking-[0.26em] text-muted-foreground">The beginning of something beautiful</p><h2 className="mx-auto mt-7 max-w-3xl font-serif text-5xl leading-[0.98] tracking-[-0.05em] sm:text-7xl">Your wedding deserves<br /><em>more than a message.</em></h2><p className="mx-auto mt-7 max-w-md text-sm leading-7 text-muted-foreground">Create an invitation your guests will actually want to open.</p><Link href="#templates" className="mt-9 inline-flex items-center gap-3 border border-primary px-5 py-3 text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Explore invitations <ArrowUpRight size={15} /></Link></Reveal></section></div></> }
+export function Homepage() { return <><InvitationLoader /><div className="bg-background"><HeroSection /><InvitationShowcase /><Gallery /><FeatureSection /><HowItWorks /><Comparison /><Stories /><FAQ /><section className="border-t border-border px-5 py-28 text-center sm:px-8 md:py-44"><Reveal><p className="text-[10px] uppercase tracking-[0.26em] text-muted-foreground">The beginning of something beautiful</p><h2 className="mx-auto mt-7 max-w-3xl font-serif text-5xl leading-[0.98] tracking-[-0.05em] sm:text-7xl">Your wedding deserves<br /><em>more than a message.</em></h2><p className="mx-auto mt-7 max-w-md text-sm leading-7 text-muted-foreground">Create an invitation your guests will actually want to open.</p><Link href="#templates" className="mt-9 inline-flex items-center gap-3 border border-primary px-5 py-3 text-xs uppercase tracking-[0.16em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Explore invitations <ArrowUpRight size={15} /></Link></Reveal></section></div></> }
