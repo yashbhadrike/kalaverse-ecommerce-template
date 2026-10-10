@@ -63,7 +63,7 @@ function HeroSection() {
     return () => ctx.revert()
   }, [])
 
-  return <section ref={heroRef} className="overflow-hidden bg-white px-0 pb-10 pt-8 text-center sm:pb-14 sm:pt-12 md:pb-16 md:pt-10">
+  return <section ref={heroRef} className="invisible overflow-hidden bg-white px-0 pb-10 pt-8 text-center sm:pb-14 sm:pt-12 md:pb-16 md:pt-10">
     <div className="hero-copy mx-auto max-w-2xl px-5 sm:px-8">
       <p className="text-[15px] font-medium text-[#77808b] sm:text-lg">Premium</p>
       <h1 className="mx-auto mt-5 max-w-3xl font-sans text-[2.8rem] font-semibold leading-[0.98] tracking-[-0.065em] text-[#101114] sm:text-6xl md:text-[4.4rem]">Wedding Invitation<br />Website Templates</h1>
