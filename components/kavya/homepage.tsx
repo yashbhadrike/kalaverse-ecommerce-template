@@ -63,20 +63,20 @@ function HeroSection() {
     return () => ctx.revert()
   }, [])
 
-  return <section ref={heroRef} className="overflow-hidden bg-white px-0 pb-12 pt-10 text-center sm:pb-16 md:pb-20 md:pt-14">
+  return <section ref={heroRef} className="overflow-hidden bg-white px-0 pb-10 pt-8 text-center sm:pb-14 sm:pt-12 md:pb-16 md:pt-10">
     <div className="hero-copy mx-auto max-w-2xl px-5 sm:px-8">
-      <p className="text-base font-medium text-muted-foreground sm:text-lg">Premium</p>
-      <h1 className="mx-auto mt-4 max-w-xl font-sans text-[2.2rem] font-semibold leading-[0.98] tracking-[-0.06em] text-black sm:text-5xl md:text-[3.25rem]">Wedding Invitation<br />Website Templates</h1>
-      <p className="mx-auto mt-5 max-w-md text-sm leading-6 text-muted-foreground sm:text-base">Choose a template, customise in 10 minutes<br className="hidden sm:block" /> and share it with your guests.</p>
-      <Link href="#templates" className="mt-7 inline-flex min-h-12 w-[210px] items-center justify-center rounded-full bg-black px-6 text-sm font-semibold text-white transition hover:scale-[1.03] hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4">Choose a template</Link>
+      <p className="text-[15px] font-medium text-[#77808b] sm:text-lg">Premium</p>
+      <h1 className="mx-auto mt-5 max-w-3xl font-sans text-[2.8rem] font-semibold leading-[0.98] tracking-[-0.065em] text-[#101114] sm:text-6xl md:text-[4.4rem]">Wedding Invitation<br />Website Templates</h1>
+      <p className="mx-auto mt-6 max-w-lg text-[15px] leading-6 text-[#77808b] sm:text-lg sm:leading-7">Choose a template, customise in 10 minutes<br />and share it with your guests.</p>
+      <Link href="#templates" className="mt-7 inline-flex min-h-14 w-[284px] items-center justify-center gap-4 rounded-full bg-[#101114] px-7 text-lg font-semibold text-white shadow-[0_8px_20px_rgba(16,17,20,0.14)] transition hover:scale-[1.03] hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4">Choose a template <ArrowUpRight size={21} strokeWidth={1.8} /></Link>
     </div>
-    <div className="relative mx-auto mt-9 h-[220px] max-w-[1440px] [perspective:1200px] sm:mt-14 sm:h-[280px] md:mt-16 md:h-[320px]">
-      <div className="absolute left-1/2 top-1/2 flex w-max -translate-x-1/2 -translate-y-1/2 items-end gap-2 sm:gap-3 md:gap-5 [transform-style:preserve-3d]">
+    <div className="relative mx-auto mt-10 h-[255px] max-w-[1540px] [perspective:1400px] sm:mt-12 sm:h-[360px] md:mt-14 md:h-[475px]">
+      <div className="absolute left-1/2 top-[35%] flex w-max -translate-x-1/2 -translate-y-1/2 items-end gap-1.5 sm:gap-3 md:gap-5 [transform-style:preserve-3d]">
         {cards.map((product, index) => {
           const center = (cards.length - 1) / 2
           const offset = index - center
-          return <Link key={product.id} href={`/product/${product.slug}`} className="hero-card group relative w-[108px] shrink-0 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_18px_35px_rgba(0,0,0,0.14)] transition-transform duration-300 hover:-translate-y-4 sm:w-[145px] md:w-[185px]" style={{ transform: `rotateY(${offset * -13}deg) translateZ(${Math.max(0, 90 - Math.abs(offset) * 22)}px) translateY(${Math.abs(offset) * 14}px)`, zIndex: 20 - Math.abs(offset) }}>
-            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="185px" priority={index < 3} />
+          return <Link key={product.id} href={`/product/${product.slug}`} className={`hero-card group relative w-[116px] shrink-0 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_18px_35px_rgba(0,0,0,0.14)] transition-transform duration-300 hover:-translate-y-4 sm:w-[170px] md:w-[278px] ${index === Math.floor(cards.length / 2) ? "md:scale-[1.08]" : ""}`} style={{ transform: `rotateY(${offset * -12}deg) translateZ(${Math.max(0, 120 - Math.abs(offset) * 28)}px) translateY(${Math.abs(offset) * 18}px)`, zIndex: 20 - Math.abs(offset) }}>
+            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="(max-width: 640px) 116px, (max-width: 1024px) 170px, 278px" priority={index < 3} />
           </Link>
         })}
       </div>
