@@ -53,6 +53,15 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
 function HeroSection() {
   const heroRef = useRef<HTMLElement>(null)
   const cards = products.slice(0, 7)
+  const [activeIndex, setActiveIndex] = useState(Math.floor(cards.length / 2))
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % cards.length)
+    }, 3200)
+    return () => window.clearInterval(timer)
+  }, [cards.length])
 
   useEffect(() => {
     if (!heroRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
@@ -70,13 +79,19 @@ function HeroSection() {
       <p className="mx-auto mt-6 max-w-lg text-[15px] leading-6 text-[#77808b] sm:text-lg sm:leading-7">Choose a template, customise in 10 minutes<br />and share it with your guests.</p>
       <Link href="#templates" className="mt-7 inline-flex min-h-14 w-[284px] items-center justify-center gap-4 rounded-full bg-[#101114] px-7 text-lg font-semibold text-white shadow-[0_8px_20px_rgba(16,17,20,0.14)] transition hover:scale-[1.03] hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4">Choose a template <ArrowUpRight size={21} strokeWidth={1.8} /></Link>
     </div>
-    <div className="relative mx-auto mt-10 h-[255px] max-w-[1540px] [perspective:1400px] sm:mt-12 sm:h-[360px] md:mt-14 md:h-[475px]">
-      <div className="absolute left-1/2 top-[35%] flex w-max -translate-x-1/2 -translate-y-1/2 items-end gap-1.5 sm:gap-3 md:gap-5 [transform-style:preserve-3d]">
+    <div className="relative mx-auto mt-10 h-[255px] max-w-[1540px] overflow-hidden [perspective:1400px] sm:mt-12 sm:h-[360px] md:mt-14 md:h-[475px]">
+      <div className="absolute left-1/2 top-[42%] flex w-max -translate-x-1/2 -translate-y-1/2 items-end gap-1.5 transition-transform duration-1000 ease-in-out sm:gap-3 md:gap-5 [transform-style:preserve-3d]">
         {cards.map((product, index) => {
-          const center = (cards.length - 1) / 2
-          const offset = index - center
-          return <Link key={product.id} href={`/product/${product.slug}`} className={`hero-card group relative w-[116px] shrink-0 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_18px_35px_rgba(0,0,0,0.14)] transition-transform duration-300 hover:-translate-y-4 sm:w-[170px] md:w-[278px] ${index === Math.floor(cards.length / 2) ? "md:scale-[1.08]" : ""}`} style={{ transform: `rotateY(${offset * -12}deg) translateZ(${Math.max(0, 120 - Math.abs(offset) * 28)}px) translateY(${Math.abs(offset) * 18}px)`, zIndex: 20 - Math.abs(offset) }}>
-            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="(max-width: 640px) 116px, (max-width: 1024px) 170px, 278px" priority={index < 3} />
+          let offset = index - activeIndex
+          if (offset > cards.length / 2) offset -= cards.length
+          if (offset < -cards.length / 2) offset += cards.length
+          const distance = Math.abs(offset)
+          const isCenter = offset === 0
+          const width = isCenter ? "w-[156px] sm:w-[230px] md:w-[330px]" : distance === 1 ? "w-[124px] sm:w-[180px] md:w-[255px]" : "w-[96px] sm:w-[140px] md:w-[195px]"
+          const vertical = distance === 0 ? 0 : distance === 1 ? 42 : 82
+          const rotation = offset * -12
+          return <Link key={product.id} href={`/product/${product.slug}`} aria-label={`View ${product.title}`} className={`hero-card group relative shrink-0 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_18px_35px_rgba(0,0,0,0.14)] transition-all duration-1000 ease-in-out ${width}`} style={{ transform: `rotateY(${rotation}deg) translateZ(${isCenter ? 100 : distance === 1 ? 44 : 0}px) translateY(${vertical}px)`, zIndex: 20 - distance, opacity: distance > 3 ? 0 : 1 }}>
+            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="(max-width: 640px) 156px, (max-width: 1024px) 230px, 330px" priority={index < 3} />
           </Link>
         })}
       </div>
