@@ -1,5 +1,5 @@
-import { Homepage } from "@/components/kavya/homepage"
+import HomepageClient from "@/components/kavya/homepage-client"
 
 export default function HomePage() {
-  return <Homepage />
+  return <HomepageClient />
 }
