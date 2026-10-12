@@ -79,19 +79,22 @@ function HeroSection() {
       <p className="mx-auto mt-6 max-w-lg text-[15px] leading-6 text-[#77808b] sm:text-lg sm:leading-7">Choose a template, customise in 10 minutes<br />and share it with your guests.</p>
       <Link href="#templates" className="mt-7 inline-flex min-h-14 w-[284px] items-center justify-center gap-4 rounded-full bg-[#101114] px-7 text-lg font-semibold text-white shadow-[0_8px_20px_rgba(16,17,20,0.14)] transition hover:scale-[1.03] hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4">Choose a template <ArrowUpRight size={21} strokeWidth={1.8} /></Link>
     </div>
-    <div className="relative mx-auto mt-10 h-[255px] max-w-[1540px] overflow-hidden [perspective:1400px] sm:mt-12 sm:h-[360px] md:mt-14 md:h-[475px]">
-      <div className="absolute left-1/2 top-[42%] flex w-max -translate-x-1/2 -translate-y-1/2 items-end gap-1.5 transition-transform duration-1000 ease-in-out sm:gap-3 md:gap-5 [transform-style:preserve-3d]">
+    <div className="relative mx-auto -mt-20 h-[300px] max-w-[1540px] overflow-hidden [perspective:1600px] sm:-mt-24 sm:h-[410px] md:-mt-20 md:h-[520px]">
+      <div className="absolute inset-x-0 top-1/2 h-full -translate-y-1/2 [transform-style:preserve-3d]">
         {cards.map((product, index) => {
           let offset = index - activeIndex
           if (offset > cards.length / 2) offset -= cards.length
           if (offset < -cards.length / 2) offset += cards.length
           const distance = Math.abs(offset)
           const isCenter = offset === 0
-          const width = isCenter ? "w-[156px] sm:w-[230px] md:w-[330px]" : distance === 1 ? "w-[124px] sm:w-[180px] md:w-[255px]" : "w-[96px] sm:w-[140px] md:w-[195px]"
-          const vertical = distance === 0 ? 0 : distance === 1 ? 42 : 82
-          const rotation = offset * -12
-          return <Link key={product.id} href={`/product/${product.slug}`} aria-label={`View ${product.title}`} className={`hero-card group relative shrink-0 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_18px_35px_rgba(0,0,0,0.14)] transition-all duration-1000 ease-in-out ${width}`} style={{ transform: `rotateY(${rotation}deg) translateZ(${isCenter ? 100 : distance === 1 ? 44 : 0}px) translateY(${vertical}px)`, zIndex: 20 - distance, opacity: distance > 3 ? 0 : 1 }}>
-            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="(max-width: 640px) 156px, (max-width: 1024px) 230px, 330px" priority={index < 3} />
+          const scale = isCenter ? 1 : distance === 1 ? 0.83 : distance === 2 ? 0.68 : 0.56
+          const cardWidth = "clamp(112px, 20vw, 300px)"
+          const step = "clamp(106px, 21vw, 315px)"
+          const translateX = `calc(${offset} * ${step})`
+          const translateY = distance === 0 ? "-50%" : distance === 1 ? "-43%" : "-35%"
+          const rotation = offset * -3
+          return <Link key={product.id} href={`/product/${product.slug}`} aria-label={`View ${product.title}`} className="hero-card group absolute left-1/2 top-1/2 block overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_22px_42px_rgba(0,0,0,0.16)] transition-[transform,opacity,filter] duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]" style={{ width: cardWidth, transform: `translateX(calc(-50% + ${translateX})) translateY(${translateY}) rotateZ(${rotation}deg) scale(${scale})`, zIndex: 20 - distance, opacity: distance > 3 ? 0 : 1, filter: isCenter ? "none" : "saturate(0.92)" }}>
+            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="(max-width: 640px) 112px, (max-width: 1024px) 220px, 300px" priority={index < 3} />
           </Link>
         })}
       </div>
