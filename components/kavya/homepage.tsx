@@ -52,15 +52,39 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
 
 function HeroSection() {
   const heroRef = useRef<HTMLElement>(null)
-  const cards = products.slice(0, 7)
-  const [activeIndex, setActiveIndex] = useState(Math.floor(cards.length / 2))
+  const stageRef = useRef<HTMLDivElement>(null)
+  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const cards = products.slice(0, 9)
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const stage = stageRef.current
+    const els = cardRefs.current.filter(Boolean) as HTMLAnchorElement[]
+    if (!stage || !els.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    const n = els.length
+    const mid = (n - 1) / 2
+    const state = { progress: 0 }
+    const wrap = (value: number) => ((((value + n / 2) % n) + n) % n) - n / 2
+    const render = () => {
+      els.forEach((el, index) => {
+        const offset = wrap(index - mid - state.progress)
+        const distance = Math.abs(offset)
+        const centered = Math.max(0, 1 - distance)
+        el.style.setProperty("--o", String(offset))
+        el.style.setProperty("--abs", String(distance))
+        el.style.setProperty("--c", String(centered))
+        el.style.zIndex = String(20 - Math.round(distance * 2))
+        el.style.opacity = String(distance > 4 ? Math.max(0, 1 - (distance - 4) * 2) : 1)
+      })
+    }
+    render()
     const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % cards.length)
+      gsap.to(state, { progress: "+=1", duration: 1.4, ease: "power3.inOut", onUpdate: render })
     }, 3200)
-    return () => window.clearInterval(timer)
+    return () => {
+      window.clearInterval(timer)
+      gsap.killTweensOf(state)
+    }
   }, [cards.length])
 
   useEffect(() => {
@@ -72,31 +96,18 @@ function HeroSection() {
     return () => ctx.revert()
   }, [])
 
-  return <section ref={heroRef} className="overflow-hidden bg-white px-0 pb-10 pt-8 text-center sm:pb-14 sm:pt-12 md:pb-16 md:pt-10">
+  return <section ref={heroRef} className="relative flex min-h-[720px] flex-col items-center overflow-hidden bg-white px-0 pb-10 pt-12 text-center sm:min-h-[820px] sm:pt-16 md:min-h-[900px] md:pt-20">
     <div className="hero-copy mx-auto max-w-2xl px-5 sm:px-8">
       <p className="text-[15px] font-medium text-[#77808b] sm:text-lg">Premium</p>
       <h1 className="mx-auto mt-5 max-w-3xl font-sans text-[2.8rem] font-semibold leading-[0.98] tracking-[-0.065em] text-[#101114] sm:text-6xl md:text-[4.4rem]">Wedding Invitation<br />Website Templates</h1>
       <p className="mx-auto mt-6 max-w-lg text-[15px] leading-6 text-[#77808b] sm:text-lg sm:leading-7">Choose a template, customise in 10 minutes<br />and share it with your guests.</p>
       <Link href="#templates" className="mt-7 inline-flex min-h-14 w-[284px] items-center justify-center gap-4 rounded-full bg-[#101114] px-7 text-lg font-semibold text-white shadow-[0_8px_20px_rgba(16,17,20,0.14)] transition hover:scale-[1.03] hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4">Choose a template <ArrowUpRight size={21} strokeWidth={1.8} /></Link>
     </div>
-    <div className="relative mx-auto -mt-20 h-[300px] max-w-[1540px] overflow-hidden [perspective:1600px] sm:-mt-24 sm:h-[410px] md:-mt-20 md:h-[520px]">
-      <div className="absolute inset-x-0 top-1/2 h-full -translate-y-1/2 [transform-style:preserve-3d]">
-        {cards.map((product, index) => {
-          let offset = index - activeIndex
-          if (offset > cards.length / 2) offset -= cards.length
-          if (offset < -cards.length / 2) offset += cards.length
-          const distance = Math.abs(offset)
-          const isCenter = offset === 0
-          const scale = isCenter ? 1 : distance === 1 ? 0.83 : distance === 2 ? 0.68 : 0.56
-          const cardWidth = "clamp(112px, 20vw, 300px)"
-          const step = "clamp(106px, 21vw, 315px)"
-          const translateX = `calc(${offset} * ${step})`
-          const translateY = distance === 0 ? "-50%" : distance === 1 ? "-43%" : "-35%"
-          const rotation = offset * -3
-          return <Link key={product.id} href={`/product/${product.slug}`} aria-label={`View ${product.title}`} className="hero-card group absolute left-1/2 top-1/2 block overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_22px_42px_rgba(0,0,0,0.16)] transition-[transform,opacity,filter] duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]" style={{ width: cardWidth, transform: `translateX(calc(-50% + ${translateX})) translateY(${translateY}) rotateZ(${rotation}deg) scale(${scale})`, zIndex: 20 - distance, opacity: distance > 3 ? 0 : 1, filter: isCenter ? "none" : "saturate(0.92)" }}>
-            <Image src={product.thumbnail} alt={product.title} width={800} height={1000} className="block h-auto w-full" sizes="(max-width: 640px) 112px, (max-width: 1024px) 220px, 300px" priority={index < 3} />
-          </Link>
-        })}
+    <div className="relative mx-auto mt-10 h-[300px] max-w-[1540px] overflow-hidden [perspective:1800px] sm:mt-12 sm:h-[410px] md:mt-14 md:h-[520px]">
+      <div ref={stageRef} className="absolute inset-0 [transform-style:preserve-3d] [--step:clamp(106px,13.6vw,215px)] [--w:clamp(112px,19.5vw,300px)]">
+        {cards.map((product, index) => <Link key={product.id} ref={(el) => { cardRefs.current[index] = el }} href={`/product/${product.slug}`} aria-label={`View ${product.title}`} className="hero-card absolute left-1/2 top-0 block w-[var(--w)] overflow-hidden rounded-[18px] border border-black/[0.04] bg-white shadow-[0_30px_50px_-18px_rgba(0,0,0,0.28),0_12px_20px_-10px_rgba(0,0,0,0.12)] transition-[transform,opacity] duration-300 will-change-transform" style={{ "--o": index - (cards.length - 1) / 2, "--abs": Math.abs(index - (cards.length - 1) / 2), "--c": Math.max(0, 1 - Math.abs(index - (cards.length - 1) / 2)), transform: "translateX(calc(-50% + var(--o) * var(--step))) translateY(calc(var(--abs) * var(--abs) * 3px + 14px - var(--c) * 24px)) translateZ(calc(var(--abs) * -45px + var(--c) * 70px)) rotateY(calc(var(--o) * -13deg)) scale(calc(1 + var(--c) * 0.05))", zIndex: 20 - Math.round(Math.abs(index - (cards.length - 1) / 2) * 2) } as React.CSSProperties}>
+          <Image src={product.thumbnail} alt={`${product.title} wedding invitation website preview`} width={800} height={1120} className="block aspect-[5/7] h-auto w-full select-none object-cover" sizes="(max-width: 640px) 112px, (max-width: 1024px) 220px, 300px" priority={index < 3} draggable={false} />
+        </Link>)}
       </div>
     </div>
   </section>
